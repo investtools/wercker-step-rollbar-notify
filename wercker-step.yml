@@ -1,0 +1,19 @@
+name: rollbar-notify
+version: 0.1.0
+description: Send deploy notification to Rollbar
+keywords:
+  - rollbar
+  - notification
+properties:
+  access-token:
+    type: string
+    required: true
+  environment:
+    type: string
+    required: false
+  environment:
+    type: string
+    required: false
+  on:
+    type: string
+    required: false
