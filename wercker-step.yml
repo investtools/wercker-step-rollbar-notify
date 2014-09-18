@@ -1,5 +1,5 @@
 name: rollbar-notify
-version: 0.1.0
+version: 0.1.1
 description: Send deploy notification to Rollbar
 keywords:
   - rollbar
@@ -11,7 +11,7 @@ properties:
   environment:
     type: string
     required: false
-  environment:
+  username:
     type: string
     required: false
   on:
