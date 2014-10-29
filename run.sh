@@ -5,6 +5,10 @@ if [ ! -n "$WERCKER_ROLLBAR_NOTIFY_ACCESS_TOKEN" ]; then
   exit 1
 fi
 
+if [ ! -n "$WERCKER_ROLLBAR_NOTIFY_ON" ]; then
+  WERCKER_ROLLBAR_NOTIFY_ON = "passed"
+fi
+
 if [ "$WERCKER_ROLLBAR_NOTIFY_ON" = "passed" ]; then
   if [ "$WERCKER_RESULT" = "failed" ]; then
     echo "Skipping..."
