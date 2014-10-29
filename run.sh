@@ -6,7 +6,7 @@ if [ ! -n "$WERCKER_ROLLBAR_NOTIFY_ACCESS_TOKEN" ]; then
 fi
 
 if [ ! -n "$WERCKER_ROLLBAR_NOTIFY_ON" ]; then
-  WERCKER_ROLLBAR_NOTIFY_ON = "passed"
+  WERCKER_ROLLBAR_NOTIFY_ON="passed"
 fi
 
 if [ "$WERCKER_ROLLBAR_NOTIFY_ON" = "passed" ]; then
