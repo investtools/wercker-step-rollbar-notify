@@ -1,20 +1,25 @@
 #!/bin/bash
 
-if [ ! -n "$WERCKER_ROLLBAR_NOTIFY_ACCESS_TOKEN" ]; then
-  error 'Please specify access-token property'
-  exit 1
+if [ -z "$WERCKER_ROLLBAR_NOTIFY_ACCESS_TOKEN" ]; then
+  fail 'Please specify access-token property'
 fi
 
-if [ ! -n "$WERCKER_ROLLBAR_NOTIFY_ON" ]; then
+if [ -z "$WERCKER_ROLLBAR_NOTIFY_ON" ]; then
   WERCKER_ROLLBAR_NOTIFY_ON="passed"
+fi
+
+if [ -n "$WERCKER_ROLLBAR_NOTIFY_BRANCH" && "$WERCKER_ROLLBAR_NOTIFY_BRANCH" -ne "$WERCKER_GIT_BRANCH" ]; then
+    info "Not building for branch $WERCKER_GIT_BRANCH"
+    return 0
 fi
 
 if [ "$WERCKER_ROLLBAR_NOTIFY_ON" = "passed" ]; then
   if [ "$WERCKER_RESULT" = "failed" ]; then
-    echo "Skipping..."
+    info "Skipping..."
     return 0
   fi
 fi
+
 curl https://api.rollbar.com/api/1/deploy/ \
   -F access_token="$WERCKER_ROLLBAR_NOTIFY_ACCESS_TOKEN" \
   -F environment="${WERCKER_ROLLBAR_NOTIFY_ENVIRONMENT:-$WERCKER_DEPLOYTARGET_NAME}" \
